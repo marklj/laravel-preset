@@ -62,11 +62,13 @@ class Preset extends BasePreset
     protected static function updateJavaScript()
     {
         tap(new Filesystem, function ($files) {
-            $files->delete(public_path('js/bootstrap.js'));
+            $files->delete(resource_path('js/bootstrap.js'));
+            $files->deleteDirectory(resource_path('js/components'));
             $files->delete(base_path('package.json'));
         });
         copy(__DIR__.'/stubs/app.js', resource_path('js/app.js'));
         copy(__DIR__.'/stubs/package.json', base_path('package.json'));
+        $files->copyDirectory(__DIR__.'/stubs/resources/js/components', resource_path('js/components'));
     }
 
     protected static function updateTemplates()
@@ -103,6 +105,6 @@ class Preset extends BasePreset
         tap(new Filesystem, function ($files) {
             $files->delete(app_path('Http/HomeController.php'));
         });
-        copy(__DIR__.'/stubs/controllers/HomeController.php', app_path('Http/HomeController.php'));
+        copy(__DIR__.'/stubs/controllers/HomeController.php', app_path('Http/Controllers/HomeController.php'));
     }
 }
