@@ -1,6 +1,6 @@
 <template>
   <layout>
-    <div class="text-2xl font-bold text-green mt-8">
+    <div class="container text-xl mx-auto text-green">
       Welcome to your site!
     </div>
   </layout>
