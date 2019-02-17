@@ -64,11 +64,11 @@ class Preset extends BasePreset
         tap(new Filesystem, function ($files) {
             $files->delete(resource_path('js/bootstrap.js'));
             $files->delete(resource_path('js/components/ExampleComponent.vue'));
+            $files->copyDirectory(__DIR__.'/stubs/resources/js/components', resource_path('js/components'));
             $files->delete(base_path('package.json'));
         });
         copy(__DIR__.'/stubs/app.js', resource_path('js/app.js'));
         copy(__DIR__.'/stubs/package.json', base_path('package.json'));
-        $files->copyDirectory(__DIR__.'/stubs/resources/js/components', resource_path('js/components'));
     }
 
     protected static function updateTemplates()
