@@ -11,12 +11,26 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css')
-    .extract(['vue', 'lodash', 'popper.js', 'axios'])
-    .webpackConfig({
-        resolve: {
-            alias: { 'vue$': 'vue/dist/vue.runtime.js' }
-        }
-    })
-    .version()
+require('laravel-mix-purgecss');
+
+mix
+  .js('resources/js/app.js', 'public/js')
+  .extract(['vue', 'axios'])
+  .webpackConfig({
+    resolve: {
+      alias: { vue$: 'vue/dist/vue.runtime.js' },
+    },
+  })
+  .postCss('resources/css/app.css', 'public/css')
+  .options({
+    postCss: [
+      require('postcss-import')(),
+      require('tailwindcss')(/* './path/to/tailwind.js' */),
+      require('postcss-nesting')(),
+    ],
+  })
+  .purgeCss();
+
+if (mix.inProduction()) {
+  mix.version();
+}

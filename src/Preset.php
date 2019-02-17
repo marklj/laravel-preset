@@ -63,8 +63,10 @@ class Preset extends BasePreset
     {
         tap(new Filesystem, function ($files) {
             $files->delete(public_path('js/bootstrap.js'));
+            $files->delete(base_path('package.json'));
         });
         copy(__DIR__.'/stubs/app.js', resource_path('js/app.js'));
+        copy(__DIR__.'/stubs/package.json', base_path('package.json'));
     }
 
     protected static function updateTemplates()
