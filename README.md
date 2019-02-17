@@ -1,8 +1,8 @@
-# 🚀 Adam Wathan's Laravel Frontend Preset
+# 🚀 Shore Laravel Preset
 
-A Laravel frontend preset that scaffolds out new applications just the way I like 'em 👌🏻
+_Forked from Adam Wathan's Laravel Frontend Preset_
 
-What it includes:
+This preset includes:
 
 - [Tailwind CSS](https://tailwindcss.com)
 - [postcss-nesting](https://github.com/jonathantneal/postcss-nesting) for nested CSS support
@@ -11,7 +11,8 @@ What it includes:
 - Removes Bootstrap and jQuery
 - Adds compiled assets to `.gitignore`
 - Adds a simple Tailwind-tuned default layout template
-- Replaces the `welcome.blade.php` template with one that extends the main layout
+- Add support for Server-side apps with client-side rendering. Learn more at [https://reinink.ca/articles/server-side-apps-with-client-side-rendering]
+- Replaces the `welcome.blade.php` template with a full page vue component template.
 
 ## Installation
 
@@ -21,7 +22,7 @@ This package isn't on Packagist (yet), so to get started, add it as a repository
 "repositories": [
     {
         "type": "vcs",
-        "url": "https://github.com/adamwathan/laravel-preset"
+        "url": "https://github.com/marklj/laravel-preset"
     }
 ]
 ```
@@ -29,16 +30,11 @@ This package isn't on Packagist (yet), so to get started, add it as a repository
 Next, run this command to add the preset to your project:
 
 ```
-composer require adamwathan/laravel-preset --dev
+composer require shore/laravel-preset --dev
 ```
 
 Finally, apply the scaffolding by running:
 
 ```
-php artisan preset nothingworks
+php artisan preset shore
 ```
-
-> What's `nothingworks`? NothingWorks Inc. is the absurd name I chose for my business, where I create products like [Refactoring to Collections](https://adamwathan.me/refactoring-to-collections/) and [Test-Driven Laravel](https://course.testdrivenlaravel.com/) 😄
-
-
-
