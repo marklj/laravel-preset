@@ -1,5 +1,5 @@
 {
-    "name": "adamwathan/laravel-preset",
+    "name": "shore/laravel-preset",
     "description": "Tailwind-Vue-Server-Rendered Laravel Frontend Preset",
     "keywords": ["laravel", "preset"],
     "license": "MIT",
