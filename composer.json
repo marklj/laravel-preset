@@ -1,6 +1,6 @@
 {
     "name": "adamwathan/laravel-preset",
-    "description": "Adam Wathan's Laravel Frontend Preset",
+    "description": "Tailwind-Vue-Server-Rendered Laravel Frontend Preset",
     "keywords": ["laravel", "preset"],
     "license": "MIT",
     "require": {
@@ -8,13 +8,13 @@
     },
     "autoload": {
         "psr-4": {
-            "NothingWorks\\LaravelPreset\\": "src/"
+            "Shore\\LaravelPreset\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "NothingWorks\\LaravelPreset\\PresetServiceProvider"
+                "Shore\\LaravelPreset\\PresetServiceProvider"
             ]
         }
     }

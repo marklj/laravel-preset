@@ -1,6 +1,6 @@
 <?php
 
-namespace NothingWorks\LaravelPreset;
+namespace Shore\LaravelPreset;
 
 use Illuminate\Support\Arr;
 use Illuminate\Container\Container;
@@ -19,6 +19,9 @@ class Preset extends BasePreset
         static::updateTemplates();
         static::removeNodeModules();
         static::updateGitignore();
+        static::updateProviders();
+        static::updateRoutes();
+        static::updateControllers();
     }
 
     protected static function updatePackageArray(array $packages)
@@ -58,8 +61,10 @@ class Preset extends BasePreset
 
     protected static function updateJavaScript()
     {
+        tap(new Filesystem, function ($files) {
+            $files->delete(public_path('js/bootstrap.js'));
+        });
         copy(__DIR__.'/stubs/app.js', resource_path('js/app.js'));
-        copy(__DIR__.'/stubs/bootstrap.js', resource_path('js/bootstrap.js'));
     }
 
     protected static function updateTemplates()
@@ -74,5 +79,28 @@ class Preset extends BasePreset
     protected static function updateGitignore()
     {
         copy(__DIR__.'/stubs/gitignore-stub', base_path('.gitignore'));
+    }
+
+    protected static function updateProviders()
+    {
+        tap(new Filesystem, function ($files) {
+            $files->delete(app_path('Providers/AppServiceProvider.php'));
+        });
+        copy(__DIR__.'/stubs/providers/AppServiceProvider.php', app_path('Providers/AppServiceProvider.php'));
+    }
+
+    protected static function updateRoutes()
+    {
+        tap(new Filesystem, function ($files) {
+            $files->delete(base_path('routes/web.php'));
+        });
+        copy(__DIR__.'/stubs/routes/web.php', base_path('routes/web.php'));
+    }
+    protected static function updateControllers()
+    {
+        tap(new Filesystem, function ($files) {
+            $files->delete(app_path('Http/HomeController.php'));
+        });
+        copy(__DIR__.'/stubs/controllers/HomeController.php', app_path('Http/HomeController.php'));
     }
 }

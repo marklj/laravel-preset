@@ -1,22 +1,33 @@
+import Vue from 'vue';
 
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
+// Register all the Vue components
+const files = require.context('./', true, /\.vue$/i);
+files.keys().map((key) =>
+  Vue.component(
+    key
+      .split('/')
+      .pop()
+      .split('.')[0],
+    files(key).default,
+  ),
+);
+console.log(files);
 
-require('./bootstrap');
+// Start Turbolinks
+require('turbolinks').start();
 
-window.Vue = require('vue');
+// Boot the Vue component
+document.addEventListener('turbolinks:load', (event) => {
+  const root = document.getElementById('app');
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+  if (window.vue) {
+    window.vue.$destroy(true);
+  }
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
-
-const app = new Vue({
-    el: '#app'
+  window.vue = new Vue({
+    render: (h) =>
+      h(Vue.component(root.dataset.component), {
+        props: JSON.parse(root.dataset.props),
+      }),
+  }).$mount(root);
 });
